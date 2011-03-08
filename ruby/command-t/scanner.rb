@@ -80,9 +80,7 @@ module CommandT
 
     def add_paths_for_directory dir, accumulator
       if repo = git_repository?(dir) && files = git_ls(repo)
-        files.each do |path|
-          accumulator << path
-        end
+        accumulator.concat files
       else
         Dir.foreach(dir) do |entry|
           next if ['.', '..'].include?(entry)
